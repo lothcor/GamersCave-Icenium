@@ -32,6 +32,7 @@
     <Folder Include="App_Resources\Android\drawable-nodpi">
       <Platform>Android</Platform>
     </Folder>
+    <Folder Include="font" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App_Resources\iOS\icon.png" />
@@ -58,6 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="donate.png" />
+    <Content Include="font\fontawesome-webfont.eot" />
+    <Content Include="font\fontawesome-webfont.svg" />
+    <Content Include="font\fontawesome-webfont.ttf" />
+    <Content Include="font\fontawesome-webfont.woff" />
+    <Content Include="font\FontAwesome.otf" />
     <Content Include="index.html" />
     <Content Include="ipb_logo.png" />
     <Content Include="kendo\js\jquery.min.js" />
@@ -69,7 +75,7 @@
     <Content Include="scripts\app\main.js" />
     <Content Include="scripts\app\identity-provider.js" />
     <Content Include="scripts\lib\everlive.all.min.js" />
-    <Content Include="styles\font-awesome.min.css" />
+    <Content Include="styles\font-awesome.css" />
     <Content Include="styles\images\app-bg.jpg" />
     <Content Include="styles\images\avatar.png" />
     <Content Include="styles\images\border.png" />
