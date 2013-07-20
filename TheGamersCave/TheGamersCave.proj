@@ -67,11 +67,16 @@
     <Content Include="scripts\app\main.js" />
     <Content Include="scripts\app\identity-provider.js" />
     <Content Include="scripts\lib\everlive.all.min.js" />
+    <Content Include="styles\font-awesome.min.css" />
     <Content Include="styles\images\app-bg.jpg" />
     <Content Include="styles\images\avatar.png" />
     <Content Include="styles\images\border.png" />
     <Content Include="styles\images\sprite.png" />
+    <Content Include="styles\jquerymobile.css" />
+    <Content Include="styles\jquerymobile.nativedroid.css" />
     <Content Include="styles\main.css" />
+    <Content Include="styles\nativedroid.color.blue.css" />
+    <Content Include="styles\nativedroid.light.css" />
     <Content Include="views\activitiesView.html" />
     <Content Include="views\activityView.html" />
     <Content Include="views\addActivityView.html" />
