@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="styles/font-awesome.css" />
+
+		<!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="styles/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="styles/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="styles/nativedroid.light.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="styles/nativedroid.color.blue.css" id='jQMnDColor' />
+
+		<title>GamersCave</title>
+		<script>
+			function onBodyLoad(){
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+
+			function onDeviceReady(){
+				getData();
+			}
+		</script>
+
+		<style>
+		.ui-header, .ui-title, .ui-footer{
+
+		    margin-right: 0 !important;
+		    margin-left: 0 !important;
+		}
+		</style>
+    </head>
+    <body onload="onBodyLoad();">
+	    <div data-role="page" data-theme='b' id="Home">
+	        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+	            <h3>The Gamers Cave</h3>
+	        </div>
+				  <div data-role="content" id="contentHome" name="contentConfirmation" align="center">    
+				  		<center>
+							<br><a href="#Video"><img src="yt.png"></a>
+							<br><br><a href="#" onclick="window.open('http://community.caved.in/', '_blank', 'location=yes')"><img src="ipb_logo.png"></a>
+							<br><br><a href="#" onclick="window.plugins.paypal.pay()"><img src="donate.png"></a>
+						</center>
+				  </div>
+			</div>
+		    <div data-role="page" data-theme='b' id="Video">
+		        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+		            <a href="#Home" data-ajax="false"><i class='icon-angle-left'></i></a>
+		            <h1></h1>
+					<div data-role="fieldcontain" style="position: absolute; top: 0; right: 0; margin: 0; padding: 0">
+					<select name="channel" id="channel" data-mini="true" data-native-menu="false">
+				   		<option value="TheGamersCave">The Gamers Cave</option>
+						<option value="CutenessCubed">Cuteness Cubed</option>
+						<option value="TheKittastrophe">Kittastrophe</option>
+				   		<option value="LunchTimeLevelUp">Nate LTLU</option>
+				   		<option value="PolarCoded">Polar Coded</option>
+				   		<option value="Traidable">Traidable</option>
+				   		<option value="TheSubpixel">Subpixel</option>
+						<option value="SubpixelPlays">Subpixel Plays</option>
+						<option value="scopesthatarequick">Scopes That Are Quick</option>
+						<option value="321System123">System</option>
+						<option value="itsdalez">The Awkward Gamers</option>
+						<option value="TehDagronSlarr">TehDragonSlarr</option>
+					</select>
+					</div>
+		        </div>
+
+					<div id="contentVideo" data-iscroll data-role="content" class="example-wrapper">
+						<div class="iscroll-pulldown">
+		          			<span class="iscroll-pull-icon"></span><span class="iscroll-pull-label"></span>
+		        		</div>
+						<ul id="listview" data-role="listview"></ul> 
+					</div>
+			</div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="Plugins/PushPlugin/PushNotification.js"></script>
+        <script type="text/javascript" src="scripts/push.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+	    <script>	
+			function getData(){
+			     $.getJSON("http://gdata.youtube.com/feeds/api/users/TheGamersCave/uploads?callback=?&alt=jsonc&v=2", function(data) {
+			        var dataContainer = $("#listview");
+			        $.each(data.data.items, function(i, val) {
+			            if (typeof(val.player) !== 'undefined' && typeof(val.title) !== 'undefined') {
+			               var toAppend = $('<li><a href="#"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')
+						   toAppend.click(function(e) {
+								window.open(val.player.default, '_blank', 'location=yes')
+							});
+							dataContainer.append(toAppend)
+			        }
+			        });
+					$("#listview").listview("refresh");
+			    });
+			}
+
+		</script>
+
+		<script>
+	        $('#channel').change(function() {
+			     $.getJSON("http://gdata.youtube.com/feeds/api/users/"+document.getElementById('channel').value+"/uploads?callback=?&alt=jsonc&v=2", function(data) {
+			        var dataContainer = $("#listview");
+					var toAppend = ''; 
+					var newpage = $('#wrapper');
+					var url ='';
+					$('#listview').html('');
+					newpage.html();
+
+			        $.each(data.data.items, function(i, val) {
+			            if (typeof(val.player) !== 'undefined' && typeof(val.title) !== 'undefined') {
+						   url = val.player.default
+			               toAppend = $('<li><a href="#" class="changeLink"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')   
+							   toAppend.click(function(e) {
+									window.open(val.player.default, '_blank', 'location=yes')
+								});
+								dataContainer.append(toAppend)
+				        }
+				        });
+						$("#listview").listview("refresh");
+			    });
+			});
+		</script>
+    </body>
+</html>
