@@ -1,46 +1,35 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>com.PhoneGap.c2dm</title>
-    </head>
-    <body>
-        
-        <!--<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>-->
-        <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-        <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="PushNotification.js"></script>
-        
-        <script type="text/javascript">
-            var pushNotification;
-            
-            function onDeviceReady() {
-                $("#app-status-ul").append('<li>deviceready event received</li>');
-                
-				document.addEventListener("backbutton", function(e)
-				{
-                	$("#app-status-ul").append('<li>backbutton event received</li>');
-  					
-      				if( $("#home").length > 0)
-					{
-						// call this to get a new token each time. don't call it to reuse existing token.
-						//pushNotification.unregister(successHandler, errorHandler);
-						e.preventDefault();
-						navigator.app.exitApp();
-					}
-					else
-					{
-						navigator.app.backHistory();
-					}
-				}, false);
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
+        <!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+        <link rel="stylesheet" href="styles/font-awesome.css" />
 
-				try 
+		<!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="styles/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="styles/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="styles/nativedroid.light.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="styles/nativedroid.color.blue.css" id='jQMnDColor' />
+
+		<title>GamersCave</title>
+		<script>
+			function onBodyLoad(){
+                try 
 				{ 
                 	pushNotification = window.plugins.pushNotification;
                 	if (device.platform == 'android' || device.platform == 'Android') {
-						$("#app-status-ul").append('<li>registering android</li>');
+						alert('registering android');
                     	pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});		// required!
 					} else {
-						$("#app-status-ul").append('<li>registering iOS</li>');
+						alert('registering iOS');
                     	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
                 	}
                 }
@@ -50,12 +39,14 @@
 					txt+="Error description: " + err.message + "\n\n"; 
 					alert(txt); 
 				} 
+                				document.addEventListener("deviceready", onDeviceReady, false);
+
             }
             
             // handle APNS notifications for iOS
             function onNotificationAPN(e) {
                 if (e.alert) {
-                     $("#app-status-ul").append('<li>push-notification: ' + e.alert + '</li>');
+                    alert('push-notification: ' + e.alert + '');
                      navigator.notification.alert(e.alert);
                 }
                     
@@ -71,14 +62,13 @@
             
             // handle GCM notifications for Android
             function onNotificationGCM(e) {
-                $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
+               alert('EVENT -> RECEIVED:' + e.event + '');
                 
                 switch( e.event )
                 {
-                    case 'registered':
-					if ( e.regid.length > 0 )
+                    case 'registered':					if ( e.regid.length > 0 )
 					{
-						$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
+						alert('REGISTERED -> REGID:' + e.regid + " ");
 						// Your GCM push server needs to know the regID before it can push to this device
 						// here is where you might want to send it the regID for later use.
 						console.log("regID = " + e.regID);
@@ -90,7 +80,7 @@
                     	// you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     	if (e.foreground)
                     	{
-							$("#app-status-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+							alert('--INLINE NOTIFICATION--' + ' ');
 
 							// if the notification contains a soundname, play it.
 							var my_media = new Media("/android_asset/www/"+e.soundname);
@@ -99,48 +89,141 @@
 						else
 						{	// otherwise we were launched because the user touched a notification in the notification tray.
 							if (e.coldstart)
-								$("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+								alert(' --COLDSTART NOTIFICATION--' + ' ');
 							else
-							$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+							alert(' --BACKGROUND NOTIFICATION--' + ' ');
 						}
 
-						$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-						$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+						alert(' MESSAGE -> MSG: ' + e.payload.message + ' ');
+						alert(' MESSAGE -> MSGCNT: ' + e.payload.msgcnt + ' ');
                     break;
                     
                     case 'error':
-						$("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+						alert(' ERROR -> MSG:' + e.msg + ' ');
                     break;
                     
                     default:
-						$("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+						alert(' EVENT -> Unknown, an event was received and we do not know what it is ');
                     break;
                 }
             }
             
             function tokenHandler (result) {
-                $("#app-status-ul").append('<li>token: '+ result +'</li>');
+               alert(' token: '+ result +' ');
                 // Your iOS push server needs to know the token before it can push to this device
                 // here is where you might want to send it the token for later use.
             }
 
             function successHandler (result) {
-                $("#app-status-ul").append('<li>success:'+ result +'</li>');
+               alert(' success:'+ result +' ');
             }
             
             function errorHandler (error) {
-                $("#app-status-ul").append('<li>error:'+ error +'</li>');
+               alert(' error:'+ error +' ');
             }
             
-			document.addEventListener('deviceready', onDeviceReady, true);
+			function onDeviceReady(){
+				getData();
+			}
+		</script>
 
-         </script>
-		<div id="home">
-			<div id="app-status-div">
-				<ul id="app-status-ul">
-					<li>Cordova PushNotification Plugin Demo</li>
-				</ul>
+		<style>
+		.ui-header, .ui-title, .ui-footer{
+
+		    margin-right: 0 !important;
+		    margin-left: 0 !important;
+		}
+		</style>
+    </head>
+    <body onload="onBodyLoad();">
+	    <div data-role="page" data-theme='b' id="Home">
+	        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+	            <h3>The Gamers Cave</h3>
+	        </div>
+				  <div data-role="content" id="contentHome" name="contentConfirmation" align="center">    
+				  		<center>
+							<br><a href="#Video"><img src="yt.png"></a>
+							<br><br><a href="#" onclick="window.open('http://community.caved.in/', '_blank', 'location=yes')"><img src="ipb_logo.png"></a>
+							<br><br><a href="#" onclick="window.plugins.paypal.pay()"><img src="donate.png"></a>
+						</center>
+				  </div>
 			</div>
-		</div>
+		    <div data-role="page" data-theme='b' id="Video">
+		        <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+		            <a href="#Home" data-ajax="false"><i class='icon-angle-left'></i></a>
+		            <h1></h1>
+					<div data-role="fieldcontain" style="position: absolute; top: 0; right: 0; margin: 0; padding: 0">
+					<select name="channel" id="channel" data-mini="true" data-native-menu="false">
+				   		<option value="TheGamersCave">The Gamers Cave</option>
+						<option value="CutenessCubed">Cuteness Cubed</option>
+						<option value="TheKittastrophe">Kittastrophe</option>
+				   		<option value="LunchTimeLevelUp">Nate LTLU</option>
+				   		<option value="PolarCoded">Polar Coded</option>
+				   		<option value="Traidable">Traidable</option>
+				   		<option value="TheSubpixel">Subpixel</option>
+						<option value="SubpixelPlays">Subpixel Plays</option>
+						<option value="scopesthatarequick">Scopes That Are Quick</option>
+						<option value="321System123">System</option>
+						<option value="itsdalez">The Awkward Gamers</option>
+						<option value="TehDagronSlarr">TehDragonSlarr</option>
+					</select>
+					</div>
+		        </div>
+
+					<div id="contentVideo" data-iscroll data-role="content" class="example-wrapper">
+						<div class="iscroll-pulldown">
+		          			<span class="iscroll-pull-icon"></span><span class="iscroll-pull-label"></span>
+		        		</div>
+						<ul id="listview" data-role="listview"></ul> 
+					</div>
+			</div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="Plugins/PushPlugin/PushNotification.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+	    <script>	
+			function getData(){
+			     $.getJSON("http://gdata.youtube.com/feeds/api/users/TheGamersCave/uploads?callback=?&alt=jsonc&v=2", function(data) {
+			        var dataContainer = $("#listview");
+			        $.each(data.data.items, function(i, val) {
+			            if (typeof(val.player) !== 'undefined' && typeof(val.title) !== 'undefined') {
+			               var toAppend = $('<li><a href="#"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')
+						   toAppend.click(function(e) {
+								window.open(val.player.default, '_blank', 'location=yes')
+							});
+							dataContainer.append(toAppend)
+			        }
+			        });
+					$("#listview").listview("refresh");
+			    });
+			}
+
+		</script>
+
+		<script>
+	        $('#channel').change(function() {
+			     $.getJSON("http://gdata.youtube.com/feeds/api/users/"+document.getElementById('channel').value+"/uploads?callback=?&alt=jsonc&v=2", function(data) {
+			        var dataContainer = $("#listview");
+					var toAppend = ''; 
+					var newpage = $('#wrapper');
+					var url ='';
+					$('#listview').html('');
+					newpage.html();
+
+			        $.each(data.data.items, function(i, val) {
+			            if (typeof(val.player) !== 'undefined' && typeof(val.title) !== 'undefined') {
+						   url = val.player.default
+			               toAppend = $('<li><a href="#" class="changeLink"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')   
+							   toAppend.click(function(e) {
+									window.open(val.player.default, '_blank', 'location=yes')
+								});
+								dataContainer.append(toAppend)
+				        }
+				        });
+						$("#listview").listview("refresh");
+			    });
+			});
+		</script>
     </body>
 </html>
