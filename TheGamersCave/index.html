@@ -26,10 +26,10 @@
 				{ 
                 	pushNotification = window.plugins.pushNotification;
                 	if (device.platform == 'android' || device.platform == 'Android') {
-						alert('registering android');
-                    	pushNotification.register(successHandler, errorHandler, {"senderID":"661780372179","ecb":"onNotificationGCM"});		// required!
+                        //alert('registering android');
+                    	pushNotification.register(successHandler, errorHandler, {"senderID":"521011265036","ecb":"onNotificationGCM"});		// required!
 					} else {
-						alert('registering iOS');
+                        //alert('registering iOS');
                     	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
                 	}
                 }
@@ -62,16 +62,25 @@
             
             // handle GCM notifications for Android
             function onNotificationGCM(e) {
-               alert('EVENT -> RECEIVED:' + e.event + '');
-                
+                //alert('EVENT -> RECEIVED:' + e.event + '');
+                var pushdID = '';
                 switch( e.event )
                 {
                     case 'registered':					if ( e.regid.length > 0 )
 					{
-						alert('REGISTERED -> REGID:' + e.regid + " ");
+                        //alert('REGISTERED -> REGID:' + e.regid + " ");
 						// Your GCM push server needs to know the regID before it can push to this device
 						// here is where you might want to send it the regID for later use.
 						console.log("regID = " + e.regID);
+                        $.post("http://23.29.122.78/subscribers", { proto: "gcm", token: e.regid }) .done(function(data) {
+                          pushdID = data.id;
+                            alert(pushdID);
+                            //alert(JSON.stringify(data));
+                          $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheGamersCave') .done(function(data) {
+                              //alert(JSON.stringify(data));
+                          });
+                        });
+                       
 					}
                     break;
                     
@@ -109,9 +118,18 @@
             }
             
             function tokenHandler (result) {
-               alert(' token: '+ result +' ');
+                //alert(' token: '+ result +' ');
+                var pushdID = '';
                 // Your iOS push server needs to know the token before it can push to this device
                 // here is where you might want to send it the token for later use.
+                $.post("http://23.29.122.78/subscribers", { proto: "apns", token: result }) .done(function(data) {
+                 pushdID = data.id;
+                    //alert(pushdID);
+                    //alert(JSON.stringify(data));
+                  $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheGamersCave') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });
+                });
             }
 
             function successHandler (result) {
