@@ -46,7 +46,7 @@
             // handle APNS notifications for iOS
             function onNotificationAPN(e) {
                 if (e.alert) {
-                    alert('push-notification: ' + e.alert + '');
+                    alert(e.alert);
                      navigator.notification.alert(e.alert);
                 }
                     
@@ -74,7 +74,7 @@
 						console.log("regID = " + e.regID);
                         $.post("http://23.29.122.78/subscribers", { proto: "gcm", token: e.regid }) .done(function(data) {
                           pushdID = data.id;
-                            alert(pushdID);
+                            //alert(pushdID);
                             //alert(JSON.stringify(data));
                           $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheGamersCave') .done(function(data) {
                               //alert(JSON.stringify(data));
@@ -89,7 +89,7 @@
                     	// you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     	if (e.foreground)
                     	{
-							alert('--INLINE NOTIFICATION--' + ' ');
+                            //alert('--INLINE NOTIFICATION--' + ' ');
 
 							// if the notification contains a soundname, play it.
 							var my_media = new Media("/android_asset/www/"+e.soundname);
@@ -97,14 +97,15 @@
 						}
 						else
 						{	// otherwise we were launched because the user touched a notification in the notification tray.
-							if (e.coldstart)
-								alert(' --COLDSTART NOTIFICATION--' + ' ');
-							else
-							alert(' --BACKGROUND NOTIFICATION--' + ' ');
+                            if (e.coldstart) {
+                                //alert(' --COLDSTART NOTIFICATION--' + ' ');
+                            } else {
+                                //alert(' --BACKGROUND NOTIFICATION--' + ' ');
+                            }
 						}
 
-						alert(' MESSAGE -> MSG: ' + e.payload.message + ' ');
-						alert(' MESSAGE -> MSGCNT: ' + e.payload.msgcnt + ' ');
+						alert(e.payload.message);
+                            //alert(' MESSAGE -> MSGCNT: ' + e.payload.msgcnt + ' ');
                     break;
                     
                     case 'error':
@@ -208,9 +209,22 @@
 			            if (typeof(val.player) !== 'undefined' && typeof(val.title) !== 'undefined') {
 			               var toAppend = $('<li><a href="#"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')
 						   toAppend.click(function(e) {
-								window.open(val.player.default, '_blank', 'location=yes')
+                               try 
+				                {     
+                                   if (device.platform == 'android' || device.platform == 'Android') {
+                                    window.open(val.player.default, '_system', 'location=yes')   
+                                   } else {   
+                                       window.open(val.player.default, '_blank', 'location=yes')   
+                                   }
+                                }
+                                catch(err) 
+                                { 
+                                    txt="There was an error on this page.\n\n"; 
+                                    txt+="Error description: " + err.message + "\n\n"; 
+                                    alert(txt); 
+                                } 
 							});
-							dataContainer.append(toAppend)
+                        dataContainer.append(toAppend)
 			        }
 			        });
 					$("#listview").listview("refresh");
@@ -234,9 +248,22 @@
 						   url = val.player.default
 			               toAppend = $('<li><a href="#" class="changeLink"><img src="'+val.thumbnail.sqDefault+'"/><h3>'+val.title+'</h3></a></li>')   
 							   toAppend.click(function(e) {
-									window.open(val.player.default, '_blank', 'location=yes')
-								});
-								dataContainer.append(toAppend)
+                               try 
+				                {     
+                                   if (device.platform == 'android' || device.platform == 'Android') {
+                                    window.open(val.player.default, '_system', 'location=yes')   
+                                   } else {   
+                                       window.open(val.player.default, '_blank', 'location=yes')   
+                                   }
+                                }
+                                catch(err) 
+                                { 
+                                    txt="There was an error on this page.\n\n"; 
+                                    txt+="Error description: " + err.message + "\n\n"; 
+                                    alert(txt); 
+                                } 
+                               });
+                            dataContainer.append(toAppend)
 				        }
 				        });
 						$("#listview").listview("refresh");
