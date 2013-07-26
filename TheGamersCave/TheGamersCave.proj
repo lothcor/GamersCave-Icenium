@@ -80,7 +80,6 @@
     <Content Include="styles\images\sprite.png" />
     <Content Include="styles\jquerymobile.css" />
     <Content Include="styles\jquerymobile.nativedroid.css" />
-    <Content Include="styles\main.css" />
     <Content Include="styles\nativedroid.color.blue.css" />
     <Content Include="styles\nativedroid.light.css" />
     <Content Include="cordova.ios.js">
