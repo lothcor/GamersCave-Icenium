@@ -20,6 +20,17 @@
         <link rel="stylesheet" href="styles/nativedroid.color.blue.css" id='jQMnDColor' />
 		<title>GamersCave</title>
 		<script>
+            var pushdID = '';
+            var CutenessCubed = '';
+            var TheKittastrophe = '';
+            var LTLU = '';
+            var PolarCoded = '';
+            var Traidable = '';
+            var SubPixelPlays = '';
+            var Scopes = '';
+            var System = '';
+            var TehDagronSlarr = '';
+            var Awkward = '';
 			function onBodyLoad(){
                 try 
 				{ 
@@ -38,7 +49,8 @@
 					txt+="Error description: " + err.message + "\n\n"; 
 					alert(txt); 
 				} 
-                				document.addEventListener("deviceready", onDeviceReady, false);
+                document.addEventListener("deviceready", onDeviceReady, false);
+                
             }
             
             // handle APNS notifications for iOS
@@ -61,7 +73,6 @@
             // handle GCM notifications for Android
             function onNotificationGCM(e) {
                 //alert('EVENT -> RECEIVED:' + e.event + '');
-                var pushdID = '';
                 switch( e.event )
                 {
                     case 'registered':					if ( e.regid.length > 0 )
@@ -118,7 +129,6 @@
             
             function tokenHandler (result) {
                 //alert(' token: '+ result +' ');
-                var pushdID = '';
                 // Your iOS push server needs to know the token before it can push to this device
                 // here is where you might want to send it the token for later use.
                 $.post("http://23.29.122.78/subscribers", { proto: "apns", token: result }) .done(function(data) {
@@ -140,19 +150,22 @@
             }
             
 			function onDeviceReady(){
+                CutenessCubed = window.localStorage.getItem("CutenessCubed");
+                TheKittastrophe = window.localStorage.getItem("TheKittastrophe");
+                LTLU = window.localStorage.getItem("LTLU");
+                PolarCoded = window.localStorage.getItem("PolarCoded");
+                Traidable = window.localStorage.getItem("Traidable");
+                SubPixelPlays = window.localStorage.getItem("SubPixelPlays");
+                Scopes = window.localStorage.getItem("Scopes");
+                System = window.localStorage.getItem("System");
+                TehDagronSlarr = window.localStorage.getItem("TehDagronSlarr");
+                Awkward = window.localStorage.getItem("Awkward");
+   
+                resubscribe();
 				getData();
 			}
             
 		</script>
-
-		<style>
-		.ui-header, .ui-title, .ui-footer{
-
-		    margin-right: 0 !important;
-		    margin-left: 0 !important;
-		}
-        .ui-page { -webkit-backface-visibility: hidden; }
-		</style>
     </head>
     <body onload="onBodyLoad();">
 	    <div data-role="page" data-theme='b' id="Home">
@@ -163,18 +176,8 @@
 				  		<center>
 							<br><a href="#Video"><img src="yt.png"></a>
 							<br><br><a href="#" onclick="window.open('http://community.caved.in/', '_blank', 'location=yes')"><img src="ipb_logo.png"></a>
-							<br><br>
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                                <input type="hidden" name="cmd" value="_donations">
-                                <input type="hidden" name="business" value="asydix@live.ca">
-                                <input type="hidden" name="lc" value="US">
-                                <input type="hidden" name="item_name" value="The Gamers Cave">
-                                <input type="hidden" name="no_note" value="0">
-                                <input type="hidden" name="currency_code" value="USD">
-                                <input type="hidden" name="bn" value="PP-DonationsBF:donate.png:NonHostedGuest">
-                                <input type="image" src="donate.png" border="0" name="submit">
-                                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                            </form>
+							<br><br><a href="#" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=asydix@live.ca&item_name=The%20Gamers%20Cave%20Donation&currency_code=USD', '_blank', 'location=yes')"><img src="donate.png"></a>
+                            <br><br><a href="#Options"><img src="ipb_logo.png"></a>
 						</center>
 				  </div>
 			</div>
@@ -209,16 +212,87 @@
 			</div>
             <div data-role="page" data-theme='b' id="Options">
                 <div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
-                    <h3></h3>
+                    <h1>Subscriptions</h1>
+                    <a href="#Home" data-ajax='false'><i class='icon-angle-left'></i></a>
                 </div>
+
+
                 <div data-role="content" id="contentOptions" align="center">
-                    <ul data-role="Listview">
-                        
-                    </ul>
+                        <div data-role="fieldcontain">
+                        <label for="CutenessCubed">CutenessCubed:</label>
+                        	<select name="CutenessCubed" id="CutenessCubed" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="TheKittastrophe">TheKittastrophe:</label>
+                        	<select name="TheKittastrophe" id="TheKittastrophe" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="LTLU">Nate LTLU:</label>
+                        	<select name="LTLU" id="LTLU" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="PolarCoded">PolarCoded:</label>
+                        	<select name="PolarCoded" id="PolarCoded" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="Traidable">Traidable:</label>
+                        	<select name="Traidable" id="Traidable" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="SubPixelPlays">SubPixelPlays:</label>
+                        	<select name="SubPixelPlays" id="SubPixelPlays" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="Scopes">Scopes That Are Quick:</label>
+                        	<select name="Scopes" id="Scopes" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="System">System:</label>
+                        	<select name="System" id="System" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="TehDagronSlarr">TehDagronSlarr:</label>
+                        	<select name="TehDagronSlarr" id="TehDagronSlarr" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div> 
+                        <div data-role="fieldcontain">
+                        <label for="Awkward">The Awkward Gamers:</label>
+                        	<select name="Awkward" id="Awkward" data-role="slider">
+                        		<option value="nope">Nope</option>
+                        		<option value="yep">Yep</option>
+                        	</select> 
+                        </div>                     
                 </div>
             </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="Plugins/PushPlugin/PushNotification.js"></script>
+        <script type="text/javascript" src="Plugins/SQLite/SQLitePlugin.js"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
@@ -290,12 +364,308 @@
 						$("#listview").listview("refresh");
 			    });
 			});
-            
-            function donate() {
-                $.mobile.showPageLoadingMsg()
-                var s = $("#form", $.mobile.activepage).serialize();
-                $.post('https://www.paypal.com/cgi-bin/webscr', s)
+                      
+            function resubscribe() {             
+                if (CutenessCubed == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/CutenessCubed') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });
+                }
+                if (TheKittastrophe == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheKittastrophe') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (LTLU == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/LTLU') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (PolarCoded == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/PolarCoded') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (Traidable == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Traidable') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (SubPixelPlays == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/SubPixelPlays') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (Scopes == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Scopes') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (System == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/System') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (TehDagronSlarr == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TehDagronSlarr') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                if (Awkward == 'True') {
+                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Awkward') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
             }
+            
+            $('#CutenessCubed').change(function() {
+                if (document.getElementById('CutenessCubed').value == "yep") {
+                    window.localStorage.setItem("CutenessCubed", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/CutenessCubed') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Cuteness Cubed.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("CutenessCubed", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/CutenessCubed',
+                        type: 'DELETE',
+                    });
+                }
+            });
+  
+            $('#CutenessCubed').change(function() {
+                if (document.getElementById('CutenessCubed').value == "yep") {
+                    window.localStorage.setItem("CutenessCubed", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/CutenessCubed') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Cuteness Cubed.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("CutenessCubed", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/CutenessCubed',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#TheKittastrophe').change(function() {
+                if (document.getElementById('TheKittastrophe').value == "yep") {
+                    window.localStorage.setItem("TheKittastrophe", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheKittastrophe') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from TheKittastrophe.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("TheKittastrophe", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheKittastrophe',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#LTLU').change(function() {
+                if (document.getElementById('LTLU').value == "yep") {
+                    window.localStorage.setItem("LTLU", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/LTLU') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Nate LTLU.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("LTLU", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/LTLU',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#PolarCoded').change(function() {
+                if (document.getElementById('PolarCoded').value == "yep") {
+                    window.localStorage.setItem("PolarCoded", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/PolarCoded') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from PolarCoded.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("PolarCoded", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/PolarCoded',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#Traidable').change(function() {
+                if (document.getElementById('Traidable').value == "yep") {
+                    window.localStorage.setItem("Traidable", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Traidable') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Traidable.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("Traidable", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Traidable',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#SubPixelPlays').change(function() {
+                if (document.getElementById('SubPixelPlays').value == "yep") {
+                    window.localStorage.setItem("SubPixelPlays", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/SubPixelPlays') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from SubPixelPlays.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("SubPixelPlays", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/SubPixelPlays',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#Scopes').change(function() {
+                if (document.getElementById('Scopes').value == "yep") {
+                    window.localStorage.setItem("Scopes", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Scopes') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Scopes That Are Quick.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("Scopes", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Scopes',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#System').change(function() {
+                if (document.getElementById('System').value == "yep") {
+                    window.localStorage.setItem("System", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/System') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from System.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("System", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/System',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#TehDagronSlarr').change(function() {
+                if (document.getElementById('TehDagronSlarr').value == "yep") {
+                    window.localStorage.setItem("TehDagronSlarr", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TehDagronSlarr') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from TehDagronSlarr.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("TehDagronSlarr", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TehDagronSlarr',
+                        type: 'DELETE',
+                    });
+                }
+            });
+             $('#Awkward').change(function() {
+                if (document.getElementById('Awkward').value == "yep") {
+                    window.localStorage.setItem("Awkward", "True");
+                    $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Awkward') .done(function(data) {
+                      //alert(JSON.stringify(data));
+                  });   
+                } 
+                else
+                {
+                   navigator.notification.alert(
+                        'You have stopped notifications from Awkward Gamers.',  // message
+                        alertDismissed,         // callback
+                        '',            // title
+                        'OK'                  // buttonName
+                    ); 
+                    window.localStorage.setItem("Awkward", "False");
+                    $.ajax({
+                        url: 'http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/Awkward',
+                        type: 'DELETE',
+                    });
+                }
+            }); 
+            function alertDismissed() {
+                // do something
+            }
+
+
 		</script>
     </body>
 </html>
