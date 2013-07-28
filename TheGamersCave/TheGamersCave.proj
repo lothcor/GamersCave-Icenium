@@ -36,6 +36,7 @@
       <Platform>Android</Platform>
     </Folder>
     <Folder Include="font" />
+    <Folder Include="scripts" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App_Resources\iOS\icon.png" />
@@ -68,11 +69,8 @@
     <Content Include="font\fontawesome-webfont.ttf" />
     <Content Include="font\fontawesome-webfont.woff" />
     <Content Include="font\FontAwesome.otf" />
-    <Content Include="index_test.html" />
     <Content Include="index.html" />
     <Content Include="ipb_logo.png" />
-    <Content Include="PushNotification.js" />
-    <Content Include="scripts\push.js" />
     <Content Include="styles\font-awesome.css" />
     <Content Include="styles\images\app-bg.jpg" />
     <Content Include="styles\images\avatar.png" />
