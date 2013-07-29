@@ -4,7 +4,7 @@
     <ProjectGuid>f2ca7588-43cc-4725-bc18-8b8d499cd635</ProjectGuid>
     <ProjectTypeGuids>{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}</ProjectTypeGuids>
     <AppIdentifier>au.com.FoxCube.GamersCave</AppIdentifier>
-    <ProjectName>TheGamersCave</ProjectName>
+    <ProjectName>GamersCave</ProjectName>
     <IsRunnable>true</IsRunnable>
     <TemplateAppName>Cordova270</TemplateAppName>
     <AndroidPermissions>android.permission.VIBRATE;android.permission.INTERNET;android.permission.WRITE_EXTERNAL_STORAGE;android.permission.ACCESS_NETWORK_STATE;android.permission.GET_ACCOUNTS;android.permission.BROADCAST_STICKY;android.permission.GET_TASKS;android.permission.WAKE_LOCK</AndroidPermissions>
@@ -13,7 +13,7 @@
     <AndroidHardwareAcceleration>false</AndroidHardwareAcceleration>
     <BundleVersion>2.0</BundleVersion>
     <iOSDeviceFamily>1;2</iOSDeviceFamily>
-    <AndroidVersionCode>2</AndroidVersionCode>
+    <AndroidVersionCode>6</AndroidVersionCode>
     <iOSDisplayName />
     <iOSBackgroundMode />
   </PropertyGroup>
