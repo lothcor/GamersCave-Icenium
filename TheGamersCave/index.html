@@ -88,6 +88,7 @@
                           $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheGamersCave') .done(function(data) {
                               //alert(JSON.stringify(data));
                           });
+                        resubscribe();
                         });
                        
 					}
@@ -138,6 +139,7 @@
                   $.post('http://23.29.122.78/subscriber/'+pushdID+'/subscriptions/TheGamersCave') .done(function(data) {
                       //alert(JSON.stringify(data));
                   });
+                resubscribe();
                 });
             }
 
@@ -161,7 +163,6 @@
                 TehDagronSlarr = window.localStorage.getItem("TehDagronSlarr");
                 Awkward = window.localStorage.getItem("Awkward");
    
-                resubscribe();
 				getData();
 			}
             
@@ -177,7 +178,7 @@
 							<br><a href="#Video"><img src="yt.png"></a>
 							<br><br><a href="#" onclick="window.open('http://community.caved.in/', '_blank', 'location=yes')"><img src="ipb_logo.png"></a>
 							<br><br><a href="#" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=asydix@live.ca&item_name=The%20Gamers%20Cave%20Donation&currency_code=USD', '_blank', 'location=yes')"><img src="donate.png"></a>
-                            <br><br><a href="#Options"><img src="ipb_logo.png"></a>
+                            <br><br><a href="#Options" onclick="checksubs();"><img src="subscriptions.png"></a>
 						</center>
 				  </div>
 			</div>
@@ -665,7 +666,38 @@
                 // do something
             }
 
-
+            function checksubs() {
+                if (CutenessCubed == 'True') {
+                    $('#CutenessCubed').val('yep');
+                }
+                if (TheKittastrophe == 'True') {
+                    $('#TheKittastrophe').val('yep');
+                }
+                if (LTLU == 'True') {
+                    $('#LTLU').val('yep');
+                }   
+                if (PolarCoded == 'True') {
+                    $('#PolarCoded').val('yep');
+                }     
+                if (Traidable == 'True') {
+                    $('#Traidable').val('yep');
+                }        
+                if (SubPixelPlays == 'True') {
+                    $('#SubPixelPlays').val('yep');
+                }         
+                if (Scopes == 'True') {
+                    $('#Scopes').val('yep');
+                }         
+                if (System == 'True') {
+                    $('#System').val('yep');
+                }         
+                if (TehDagronSlarr == 'True') {
+                    $('#TehDagronSlarr').val('yep');
+                }        
+                if (Awkward == 'True') {
+                    $('#Awkward').val('yep');
+                }           
+            }
 		</script>
     </body>
 </html>

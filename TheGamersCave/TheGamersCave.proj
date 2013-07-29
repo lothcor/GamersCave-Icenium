@@ -90,6 +90,7 @@
       <Platform>Android</Platform>
       <TargetName>cordova.js</TargetName>
     </Content>
+    <Content Include="subscriptions.png" />
     <Content Include="yt.png" />
   </ItemGroup>
   <ItemGroup>
